@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+  - name: Download bash script
+    command: wget "https://raw.githubusercontent.com/moghtech/komodo/main/scripts/setup-periphery.py" -O setup-periphery.py
+
+  - name: Run Python script
+    become: yes
+    command: python3 setup-periphery.py --user
