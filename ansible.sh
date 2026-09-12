@@ -21,7 +21,7 @@ fi
 
 # 2. User Creation & Account Unlocking
 if ! id -u ansible >/dev/null 2>&1; then
-    useradd -m -s \"\$SHELL_BIN\" ansible
+    useradd -m -s ${SHELL_BIN} ansible
 fi
 # Ensure account is not locked (Common Alpine issue)
 if [ -f /etc/shadow ]; then
@@ -33,7 +33,7 @@ mkdir -p /home/ansible/.ssh
 
 # 4. SSH StrictModes Fix (Crucial for Alpine/Hardened templates)
 # Home dir must NOT be group-writable
-chown root:root /home/ansible
+chown ansible:ansible /home/ansible
 chmod 755 /home/ansible
 
 # Check if key exists, otherwise append
@@ -56,8 +56,8 @@ sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_con
 sed -i 's/#AuthorizedKeysFile/AuthorizedKeysFile/' /etc/ssh/sshd_config
 
 # 7. Restart SSH service to apply changes
-if [ -f /etc/init.d/\$SSH_SERVICE ]; then
-    /etc/init.d/\$SSH_SERVICE restart
+if [ -f /etc/init.d/${SSH_SERVICE} ]; then
+    /etc/init.d/${SSH_SERVICE} restart
 elif command -v systemctl >/dev/null 2>&1; then
-    systemctl restart \$SSH_SERVICE
+    systemctl restart ${SSH_SERVICE}
 fi
