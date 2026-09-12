@@ -10,7 +10,7 @@
 
   - name: Run Python script
     ansible.builtin.command:
-      cmd: "python3 /tmp/setup-periphery.py --user"
+      cmd: "python3 /tmp/setup-periphery.py"
     register: script_output
     changed_when: true
 
