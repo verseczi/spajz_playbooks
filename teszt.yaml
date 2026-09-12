@@ -1,0 +1,7 @@
+---
+- name: Test LXC Connectivity
+  hosts: all  # This targets everything in your Semaphore Inventory
+  gather_facts: false
+  tasks:
+    - name: Try to ping the containers
+      ansible.builtin.ping:
