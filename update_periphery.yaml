@@ -2,9 +2,6 @@
 - hosts: all
   become: yes
   tasks:
-  - name: Download bash script
-    command: wget "https://raw.githubusercontent.com/moghtech/komodo/main/scripts/setup-periphery.py" -O setup-periphery.py
-
   - name: Download Python script from GitHub
     ansible.builtin.get_url:
       url: "https://raw.githubusercontent.com/moghtech/komodo/main/scripts/setup-periphery.py"
