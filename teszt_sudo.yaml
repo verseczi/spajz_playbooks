@@ -1,4 +1,6 @@
+---
 - name: Update apt cache
+  hosts: all  # This targets everything in your Semaphore Inventory
   become: true
   apt:
     update_cache: yes
