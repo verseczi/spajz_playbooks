@@ -1,9 +1,22 @@
 ---
 - hosts: all
+  become: yes
   tasks:
   - name: Download bash script
     command: wget "https://raw.githubusercontent.com/moghtech/komodo/main/scripts/setup-periphery.py" -O setup-periphery.py
 
+  - name: Download Python script from GitHub
+    ansible.builtin.get_url:
+      url: "https://raw.githubusercontent.com/moghtech/komodo/main/scripts/setup-periphery.py"
+      dest: "/tmp/setup-periphery.py"
+      mode: '0755' # Makes the file executable
+
   - name: Run Python script
-    become: yes
-    command: python3 setup-periphery.py --user
+    ansible.builtin.command:
+      cmd: "python3 /tmp/setup-periphery.py --user"
+    register: script_output
+    changed_when: true
+
+  - name: Display script output
+    ansible.builtin.debug:
+      var: script_output.stdout_lines
