@@ -37,8 +37,8 @@ chown ansible:ansible /home/ansible
 chmod 755 /home/ansible
 
 # Check if key exists, otherwise append
-if ! grep -q \"$PUB_KEY\" /home/ansible/.ssh/authorized_keys 2>/dev/null; then
-    echo \"$PUB_KEY\" >> /home/ansible/.ssh/authorized_keys
+if ! grep -q $PUB_KEY /home/ansible/.ssh/authorized_keys 2>/dev/null; then
+    echo $PUB_KEY >> /home/ansible/.ssh/authorized_keys
 fi
 
 # Set strict perms on the .ssh folder itself
