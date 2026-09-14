@@ -6,7 +6,6 @@
     ansible.builtin.get_url:
       url: "https://raw.githubusercontent.com/moghtech/komodo/main/scripts/setup-periphery.py"
       dest: "/tmp/setup-periphery.py"
-      mode: '0755' # Makes the file executable
 
   - name: Run Python script
     ansible.builtin.command:
