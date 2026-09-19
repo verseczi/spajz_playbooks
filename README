@@ -1,0 +1,8 @@
+###VM
+```
+curl -sSL https://raw.githubusercontent.com/verseczi/spajz_playbooks/refs/heads/main/ansible.sh | bash;
+```
+### LXC (from host)
+```
+curl -sSL https://raw.githubusercontent.com/verseczi/spajz_playbooks/refs/heads/main/ansible_proxmox_lxc_enroll.sh | bash
+```
