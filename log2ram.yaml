@@ -85,6 +85,10 @@
         - {regexp: '^LOG_DISK_SIZE=(.*)$', line: 'LOG_DISK_SIZE={{ log2ram_log_disk_size }}'}
       notify: Restart log2ram
 
+    - name: Vacuum systemd journal to limit size to 128M
+      ansible.builtin.command:
+        cmd: journalctl --vacuum-size=128M
+      become: true # Required if running Ansible as a non-root user
 
   handlers:
     - name: Restart log2ram
