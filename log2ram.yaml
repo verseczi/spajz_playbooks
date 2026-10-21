@@ -36,11 +36,15 @@
       apt:
         name: gnupg
 
-    - name: Add gpg key
-      shell: 
-        cmd: >
-          curl -fsSL {{ log2ram_gpg }} | gpg --dearmor --yes -o {{ log2ram_keyring }}
-        creates: "{{ log2ram_keyring }}"
+    - name: Download Azlux GPG key
+      get_url:
+        url: https://azlux.fr/repo.gpg
+        dest: /tmp/azlux-repo.gpg
+        validate_certs: no
+
+    - name: Dearmor GPG key
+      ansible.builtin.command:
+        cmd: gpg --dearmor --yes -o /usr/share/keyrings/azlux-archive-keyring.gpg /tmp/azlux-repo.gpg
 
     - name: Install ca-certificates
       apt:
