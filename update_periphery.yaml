@@ -13,6 +13,13 @@
     register: script_output
     changed_when: true
 
+  - name: Enable and start Periphery service
+    ansible.builtin.systemd:
+      name: periphery
+      enabled: true
+      state: started
+      daemon_reload: true
+
   - name: Display script output
     ansible.builtin.debug:
       var: script_output.stdout_lines
